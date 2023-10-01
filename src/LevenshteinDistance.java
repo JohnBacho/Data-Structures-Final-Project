@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Scanner;
+import java.util.Scanner; // hello
 
 public class LevenshteinDistance {
     private static HashSet<String> Dictionary = new HashSet<>();
