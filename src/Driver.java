@@ -15,7 +15,7 @@ public class Driver {
                 System.out.println("Enter the word you'd like to add");
                 Scanner look = new Scanner(System.in);
                 String letter = look.nextLine();
-                LevenshteinDistance.add(letter);
+                LevenshteinDistance.AddToTXT(letter);
             }
         }
     }

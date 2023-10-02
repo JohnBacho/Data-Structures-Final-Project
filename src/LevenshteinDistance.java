@@ -92,7 +92,7 @@ public class LevenshteinDistance {
 
     }
 
-    public static void add(String item) { // this Just appends the word entered into the txt file :)
+    public static void AddToTXT(String item) { // this Just appends the word entered into the txt file :)
         try (BufferedWriter writer = new BufferedWriter((new FileWriter("wiki-100k.txt", true)))) {
             writer.write("\n" + item);
         } catch (IOException e) {
