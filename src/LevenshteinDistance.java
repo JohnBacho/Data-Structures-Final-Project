@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class LevenshteinDistance {
     private static HashSet<String> Dictionary = new HashSet<>();
+    private static int counter;
 
     public static void start() {
         System.out.println("Type a word or sentance");
@@ -21,7 +22,7 @@ public class LevenshteinDistance {
         // called NEW1[]
 
         for (String word1 : NEW1) { // this line goes through each word in the sentance that the user entered
-            LevenshteinDistance.Scanheap(word1, 3);// it then calls the scanheap class
+            LevenshteinDistance.Scanheap(word1, 0);// it then calls the scanheap class
         }
 
     }
@@ -47,9 +48,16 @@ public class LevenshteinDistance {
         boolean Checker = Dictionary.contains(word1);// checks if the word exist in the dictionary
 
         if (Checker == false) { // if it doesn't exist it goes through the edit distance alogrithm
+            counter = 0;
             for (String word2 : Dictionary) { // iterates through the word entered and checks it aginst words in the
                                               // dictionary to find a word with a small edit distance
                 int distance = calculateDistance(word1, word2, Tolerance);
+                counter++;
+                if (Dictionary.size() == counter) {
+                    Tolerance++;
+                    if (Tolerance != 3)
+                        System.out.println(Tolerance);
+                }
 
                 if (distance < 3) { // if the edit distance is less than 3 it returns the incorrect spelled word and
                                     // then it shows that word it suggust to correct it with
