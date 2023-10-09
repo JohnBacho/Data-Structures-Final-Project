@@ -55,8 +55,11 @@ public class LevenshteinDistance {
                 counter++;
                 if (Dictionary.size() == counter) {
                     Tolerance++;
-                    if (Tolerance != 3)
-                        System.out.println(Tolerance);
+                    System.out.println(Tolerance);
+                    if (Tolerance != 3) {
+                        Scanheap(word1, Tolerance);
+                    }
+
                 }
 
                 if (distance < 3) { // if the edit distance is less than 3 it returns the incorrect spelled word and
