@@ -21,12 +21,12 @@ public class LevenshteinDistance {
         // called NEW1[]
 
         for (String word1 : NEW1) { // this line goes through each word in the sentance that the user entered
-            LevenshteinDistance.Scanheap(word1);// it then calls the scanheap class
+            LevenshteinDistance.Scanheap(word1, 3);// it then calls the scanheap class
         }
 
     }
 
-    public static void Scanheap(String word1) {
+    public static void Scanheap(String word1, int Tolerance) {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader("wiki-100k.txt"));
@@ -49,19 +49,21 @@ public class LevenshteinDistance {
         if (Checker == false) { // if it doesn't exist it goes through the edit distance alogrithm
             for (String word2 : Dictionary) { // iterates through the word entered and checks it aginst words in the
                                               // dictionary to find a word with a small edit distance
-                int distance = calculateDistance(word1, word2);
+                int distance = calculateDistance(word1, word2, Tolerance);
+
                 if (distance < 3) { // if the edit distance is less than 3 it returns the incorrect spelled word and
                                     // then it shows that word it suggust to correct it with
                     System.out.println(
                             "Levenshtein distance between '" + word1 + "' and '" + word2 + "' is: " + distance);
                 }
             }
+
         } else {// if the word is spelled correctly it prints the word and a check mark
             System.out.println(word1 + " ✅");
         }
     }
 
-    public static int calculateDistance(String word1, String word2) {
+    public static int calculateDistance(String word1, String word2, int Tolerance) {
         int len1 = word1.length();
         int len2 = word2.length();
         // this method finds the minimum edit distance between word 1 and word 2
@@ -69,7 +71,7 @@ public class LevenshteinDistance {
         // deleting a charter and subsituting a charter
         // it is trying to find out how many actions need to be performed to make word1
         // look like word2
-        if (Math.abs(len1 - len2) >= 3) {
+        if (Math.abs(len1 - len2) != Tolerance) {
             return len1 = 10;
         }
         if (len1 == 0) {
@@ -81,12 +83,12 @@ public class LevenshteinDistance {
         }
 
         if (word1.charAt(0) == word2.charAt(0)) {
-            return calculateDistance(word1.substring(1), word2.substring(1));
+            return calculateDistance(word1.substring(1), word2.substring(1), Tolerance);
         }
 
-        int insertion = calculateDistance(word1, word2.substring(1)) + 1;
-        int deletion = calculateDistance(word1.substring(1), word2) + 1;
-        int substitution = calculateDistance(word1.substring(1), word2.substring(1)) + 1;
+        int insertion = calculateDistance(word1, word2.substring(1), Tolerance) + 1;
+        int deletion = calculateDistance(word1.substring(1), word2, Tolerance) + 1;
+        int substitution = calculateDistance(word1.substring(1), word2.substring(1), Tolerance) + 1;
 
         return Math.min(Math.min(insertion, deletion), substitution);
 
