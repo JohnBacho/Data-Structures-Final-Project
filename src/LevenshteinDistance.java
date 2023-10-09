@@ -49,18 +49,22 @@ public class LevenshteinDistance {
 
         if (Checker == false) { // if it doesn't exist it goes through the edit distance alogrithm
             counter = 0;
-            for (String word2 : Dictionary) { // iterates through the word entered and checks it aginst words in the
-                                              // dictionary to find a word with a small edit distance
-                int distance = calculateDistance(word1, word2, Tolerance);
+            for (String word2 : Dictionary) {
                 counter++;
                 if (Dictionary.size() == counter) {
                     Tolerance++;
                     System.out.println(Tolerance);
                     if (Tolerance != 3) {
                         Scanheap(word1, Tolerance);
+                    } else if (Tolerance == 3) {
+                        Tolerance = 0;
+                        break;
                     }
-
                 }
+                if (Math.abs(word1.length() - word2.length()) != Tolerance) {
+                    continue;
+                }
+                int distance = calculateDistance(word1, word2);
 
                 if (distance < 3) { // if the edit distance is less than 3 it returns the incorrect spelled word and
                                     // then it shows that word it suggust to correct it with
@@ -74,7 +78,7 @@ public class LevenshteinDistance {
         }
     }
 
-    public static int calculateDistance(String word1, String word2, int Tolerance) {
+    public static int calculateDistance(String word1, String word2) {
         int len1 = word1.length();
         int len2 = word2.length();
         // this method finds the minimum edit distance between word 1 and word 2
@@ -82,9 +86,10 @@ public class LevenshteinDistance {
         // deleting a charter and subsituting a charter
         // it is trying to find out how many actions need to be performed to make word1
         // look like word2
-        if (Math.abs(len1 - len2) != Tolerance) {
-            return len1 = 10;
-        }
+        // if (Math.abs(len1 - len2) > Tolerance) {
+        // return len1 = 10;
+        // }
+
         if (len1 == 0) {
             return len2;
         }
@@ -94,21 +99,20 @@ public class LevenshteinDistance {
         }
 
         if (word1.charAt(0) == word2.charAt(0)) {
-            return calculateDistance(word1.substring(1), word2.substring(1), Tolerance);
+            return calculateDistance(word1.substring(1), word2.substring(1));
         }
 
-        int insertion = calculateDistance(word1, word2.substring(1), Tolerance) + 1;
-        int deletion = calculateDistance(word1.substring(1), word2, Tolerance) + 1;
-        int substitution = calculateDistance(word1.substring(1), word2.substring(1), Tolerance) + 1;
+        int insertion = calculateDistance(word1, word2.substring(1)) + 1;
+        int deletion = calculateDistance(word1.substring(1), word2) + 1;
+        int substitution = calculateDistance(word1.substring(1), word2.substring(1)) + 1;
 
-        return Math.min(Math.min(insertion, deletion), substitution);
+        return Math.min(Math.min(insertion, substitution), deletion);
 
     }
 
     public static void AddToTXT(String item) { // this Just appends the word entered into the txt file :)
         try (BufferedWriter writer = new BufferedWriter((new FileWriter("wiki-100k.txt", true)))) {
             writer.write("\n" + item);
-            System.out.println(item + " has been added to the Dictionary");
         } catch (IOException e) {
             e.printStackTrace();
         }
