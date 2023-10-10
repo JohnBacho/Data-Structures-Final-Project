@@ -64,10 +64,15 @@ public class LevenshteinDistance {
                 if (Math.abs(word1.length() - word2.length()) != Tolerance) {
                     continue;
                 }
-                if (!word1.substring(0, 1).equals(word2.substring(0, 1))
-                        && !word1.substring(word1.length() - 1).equals(word2.substring(word2.length() - 1))) {
-                    continue;
+                if (word1.length() > 3 && word2.length() > 3) {
+                    if (!word1.substring(0, 2).equals(word2.substring(0, 2))
+                            && !word1.substring(word1.length() - 2, word1.length())
+                                    .equals(word2.substring(word2.length() - 2, word2.length()))
+                            && word1.length() > 3) {
+                        continue;
+                    }
                 }
+
                 int distance = calculateDistance(word1, word2);
 
                 if (distance < 3) { // if the edit distance is less than 3 it returns the incorrect spelled word and
