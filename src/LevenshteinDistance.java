@@ -64,6 +64,10 @@ public class LevenshteinDistance {
                 if (Math.abs(word1.length() - word2.length()) != Tolerance) {
                     continue;
                 }
+                if (!word1.substring(0, 1).equals(word2.substring(0, 1))
+                        && !word1.substring(word1.length() - 1).equals(word2.substring(word2.length() - 1))) {
+                    continue;
+                }
                 int distance = calculateDistance(word1, word2);
 
                 if (distance < 3) { // if the edit distance is less than 3 it returns the incorrect spelled word and
@@ -86,9 +90,6 @@ public class LevenshteinDistance {
         // deleting a charter and subsituting a charter
         // it is trying to find out how many actions need to be performed to make word1
         // look like word2
-        // if (Math.abs(len1 - len2) > Tolerance) {
-        // return len1 = 10;
-        // }
 
         if (len1 == 0) {
             return len2;
