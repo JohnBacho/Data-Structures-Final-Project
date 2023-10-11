@@ -42,8 +42,10 @@ public class LevenshteinDistance {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // the point of this class is to first check if the word is right and if the
-        // word isnt it then uses the edit distance
+        /*
+         * the point of this class is to first check if the word is right and if the
+         * word isnt it then uses the edit distance
+         */
 
         boolean Checker = Dictionary.contains(word1);// checks if the word exist in the dictionary
 
@@ -75,8 +77,10 @@ public class LevenshteinDistance {
 
                 int distance = calculateDistance(word1, word2);
 
-                if (distance < 3) { // if the edit distance is less than 3 it returns the incorrect spelled word and
-                                    // then it shows that word it suggust to correct it with
+                if (distance < 3) { /*
+                                     * if the edit distance is less than 3 it returns the incorrect spelled word and
+                                     * then it shows that word it suggust to correct it with
+                                     */
                     System.out.println(
                             "Levenshtein distance between '" + word1 + "' and '" + word2 + "' is: " + distance);
                 }
@@ -90,11 +94,13 @@ public class LevenshteinDistance {
     public static int calculateDistance(String word1, String word2) {
         int len1 = word1.length();
         int len2 = word2.length();
-        // this method finds the minimum edit distance between word 1 and word 2
-        // to find the minimum edit distance between the 2 it trys inserting a charter
-        // deleting a charter and subsituting a charter
-        // it is trying to find out how many actions need to be performed to make word1
-        // look like word2
+        /*
+         * this method finds the minimum edit distance between word 1 and word 2
+         * to find the minimum edit distance between the 2 it trys inserting a charter
+         * deleting a charter and subsituting a charter
+         * it is trying to find out how many actions need to be performed to make word1
+         * look like word2
+         */
 
         if (len1 == 0) {
             return len2;
