@@ -17,7 +17,7 @@ public class LevenshteinDistance {
         String word = scan.nextLine();
         // String word = WORD.toLowerCase();
 
-        String NEW1[] = word.split(" ");
+        String NEW1[] = word.split("\\s+|(?=\\.)|(?=\\,)");
         // this splits the sentance into words and then puts those words in an array
         // called NEW1[]
 
@@ -123,6 +123,7 @@ public class LevenshteinDistance {
     }
 
     public static void AddToTXT(String item) { // this Just appends the word entered into the txt file :)
+        System.out.println(item + " added to dictionary");
         try (BufferedWriter writer = new BufferedWriter((new FileWriter("wiki-100k.txt", true)))) {
             writer.write("\n" + item);
         } catch (IOException e) {
