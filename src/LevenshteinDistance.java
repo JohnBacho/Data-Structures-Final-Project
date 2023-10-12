@@ -51,43 +51,49 @@ public class LevenshteinDistance {
 
         if (Checker == false) { // if it doesn't exist it goes through the edit distance alogrithm
             counter = 0;
-            for (String word2 : Dictionary) {
-                counter++;
-                if (Dictionary.size() == counter) {
-                    Tolerance++;
-                    System.out.println(Tolerance);
-                    if (Tolerance != 3) {
-                        Scanheap(word1, Tolerance);
-                    } else if (Tolerance == 3) {
-                        Tolerance = 0;
-                        break;
-                    }
-                }
-                if (Math.abs(word1.length() - word2.length()) != Tolerance) {
-                    continue;
-                }
-                if (word1.length() > 3 && word2.length() > 3) {
-                    if (!word1.substring(0, 2).equals(word2.substring(0, 2))
-                            && !word1.substring(word1.length() - 2, word1.length())
-                                    .equals(word2.substring(word2.length() - 2, word2.length()))
-                            && word1.length() > 3) {
-                        continue;
-                    }
-                }
-
-                int distance = calculateDistance(word1, word2);
-
-                if (distance < 3) { /*
-                                     * if the edit distance is less than 3 it returns the incorrect spelled word and
-                                     * then it shows that word it suggust to correct it with
-                                     */
-                    System.out.println(
-                            "Levenshtein distance between '" + word1 + "' and '" + word2 + "' is: " + distance);
-                }
-            }
-
+            GoThroughDictionary(word1, Tolerance);
         } else {// if the word is spelled correctly it prints the word and a check mark
             System.out.println(word1 + " ✅");
+        }
+    }
+
+    public static void GoThroughDictionary(String word1, int Tolerance) {
+        for (String word2 : Dictionary) {
+            counter++;
+            if (Dictionary.size() == counter) {
+                Tolerance++;
+                System.out.println(Tolerance);
+                if (Tolerance != 3) {
+                    Scanheap(word1, Tolerance);
+                } else if (Tolerance == 3) {
+                    Tolerance = 0;
+                    break;
+                }
+            }
+            if (Math.abs(word1.length() - word2.length()) != Tolerance) {
+                continue;
+            }
+            if (word1.length() > 3 && word2.length() > 3) {
+                if (!word1.substring(0, 2).equals(word2.substring(0, 2))
+                        && !word1.substring(word1.length() - 2, word1.length())
+                                .equals(word2.substring(word2.length() - 2, word2.length()))) {
+                    continue;
+                }
+            }
+            phone(word1, word2);
+        }
+
+    }
+
+    public static void phone(String word1, String word2) {
+        int distance = calculateDistance(word1, word2);
+
+        if (distance < 3) { /*
+                             * if the edit distance is less than 3 it returns the incorrect spelled word and
+                             * then it shows that word it suggust to correct it with
+                             */
+            System.out.println(
+                    "Levenshtein distance between '" + word1 + "' and '" + word2 + "' is: " + distance);
         }
     }
 
