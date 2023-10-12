@@ -17,7 +17,7 @@ public class LevenshteinDistance {
         String word = scan.nextLine();
         // String word = WORD.toLowerCase();
 
-        String NEW1[] = word.split("\\s+|(?=\\.)|(?=\\,)");
+        String NEW1[] = word.split("\\s+|(?=[.,?])");
         // this splits the sentance into words and then puts those words in an array
         // called NEW1[]
 
