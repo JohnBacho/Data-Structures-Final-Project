@@ -4,15 +4,15 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.*;
+
 
 public class LevenshteinDistance {
     private static HashSet<String> Dictionary = new HashSet<>();
     private static int counter;
 
     public static void start() {
-        System.out.println("Type a word or sentance");
+        System.out.println("Type a word or sentence");
         Scanner scan = new Scanner(System.in);
         String word = scan.nextLine();
         // String word = WORD.toLowerCase();
@@ -24,6 +24,15 @@ public class LevenshteinDistance {
         for (String word1 : NEW1) { // this line goes through each word in the sentance that the user entered
             LevenshteinDistance.Scanheap(word1, 0);// it then calls the scanheap class
         }
+
+
+
+        /*for (String word1 : NEW1) {
+            LevenshteinDistance.Scanheap(word1, 0);
+            List<String> suggestions = getTop5Suggestions(word1);
+            printSuggestions(word1, suggestions);
+        }
+        */
 
     }
 
@@ -76,7 +85,7 @@ public class LevenshteinDistance {
             if (word1.length() > 3 && word2.length() > 3) {
                 if (!word1.substring(0, 2).equals(word2.substring(0, 2))
                         && !word1.substring(word1.length() - 2, word1.length())
-                                .equals(word2.substring(word2.length() - 2, word2.length()))) {
+                        .equals(word2.substring(word2.length() - 2, word2.length()))) {
                     continue;
                 }
             }
@@ -88,14 +97,16 @@ public class LevenshteinDistance {
     public static void phone(String word1, String word2) {
         int distance = calculateDistance(word1, word2);
 
-        if (distance < 3) { /*
-                             * if the edit distance is less than 3 it returns the incorrect spelled word and
-                             * then it shows that word it suggust to correct it with
-                             */
+        if (distance < 3) {/*
+         * if the edit distance is less than 3 it returns the incorrect spelled word and
+         * then it shows that word it suggust to correct it with
+         */
+
             System.out.println(
                     "Levenshtein distance between '" + word1 + "' and '" + word2 + "' is: " + distance);
         }
     }
+
 
     public static int calculateDistance(String word1, String word2) {
         int len1 = word1.length();
@@ -136,4 +147,40 @@ public class LevenshteinDistance {
             e.printStackTrace();
         }
     }
+
+
+    /*
+    public static List<String> getTop5Suggestions(String word1) {
+        Map<String, Integer> suggestionsMap = new HashMap<>();
+
+        for (String word2 : Dictionary) {
+            int distance = calculateDistance(word1, word2);
+
+            if (distance < 3) {
+                suggestionsMap.put(word2, distance);
+            }
+        }
+
+        List<String> suggestions = new ArrayList<>(suggestionsMap.keySet());
+
+        suggestions.sort(Comparator.comparingInt(suggestionsMap::get));
+
+        int maxSuggestions = Math.min(5, suggestions.size());
+
+        return suggestions.subList(0, maxSuggestions);
+    }
+
+    public static void printSuggestions(String word, List<String> suggestions) {
+        System.out.println("Suggestions for '" + word + "':");
+
+        if (suggestions.isEmpty()) {
+            System.out.println("No suggestions found");
+        } else {
+            for (String suggestion : suggestions) {
+                System.out.println(suggestion + " (Distance: " + calculateDistance(word, suggestion) + ")");
+            }
+        }
+    }
+
+     */
 }
