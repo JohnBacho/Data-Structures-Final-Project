@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class LevenshteinDistance {
     private static HashSet<String> Dictionary = new HashSet<>();
     private static int counter;
+    private static boolean STOP = false;
 
     public static void start() {
         System.out.println("Type a word or sentance");
@@ -22,12 +23,12 @@ public class LevenshteinDistance {
         // called NEW1[]
 
         for (String word1 : NEW1) { // this line goes through each word in the sentance that the user entered
-            LevenshteinDistance.Scanheap(word1, 0);// it then calls the scanheap class
+            LevenshteinDistance.ScanHashSet(word1, 0);// it then calls the scanheap class
         }
 
     }
 
-    public static void Scanheap(String word1, int Tolerance) {
+    public static void ScanHashSet(String word1, int Tolerance) {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader("wiki-100k.txt"));
@@ -50,21 +51,22 @@ public class LevenshteinDistance {
         boolean Checker = Dictionary.contains(word1);// checks if the word exist in the dictionary
 
         if (Checker == false) { // if it doesn't exist it goes through the edit distance alogrithm
+            STOP = false;
             counter = 0;
-            GoThroughDictionary(word1, Tolerance);
+            CycleThroughDictionary(word1, Tolerance);
         } else {// if the word is spelled correctly it prints the word and a check mark
             System.out.println(word1 + " ✅");
         }
     }
 
-    public static void GoThroughDictionary(String word1, int Tolerance) {
+    public static void CycleThroughDictionary(String word1, int Tolerance) {
         for (String word2 : Dictionary) {
             counter++;
             if (Dictionary.size() == counter) {
                 Tolerance++;
                 System.out.println(Tolerance);
                 if (Tolerance != 3) {
-                    Scanheap(word1, Tolerance);
+                    ScanHashSet(word1, Tolerance);
                 } else if (Tolerance == 3) {
                     Tolerance = 0;
                     break;
@@ -80,12 +82,15 @@ public class LevenshteinDistance {
                     continue;
                 }
             }
-            phone(word1, word2);
+            if (STOP) {
+                break;
+            }
+            calculateAndPrintLevenshteinDistance(word1, word2);
         }
 
     }
 
-    public static void phone(String word1, String word2) {
+    public static void calculateAndPrintLevenshteinDistance(String word1, String word2) {
         int distance = calculateDistance(word1, word2);
 
         if (distance < 3) { /*
