@@ -172,27 +172,43 @@ public class LevenshteinDistance {
                 for (int i = 0; i < 5; i++) {
                     System.out.println(i + 1 + ": " + list.get(i));
                 }
+                System.out.println("6: More suggestions");
+                choose(list, 6);
             }
-            if (list.size() <= 5) {
+            if (list.size() <= 5 && !list.isEmpty()) {
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println(list.get(i));
+                    System.out.println(i + 1 + ": " + list.get(i));
                 }
+                choose(list, list.size());
             } else if (list.isEmpty())
                 System.out.println("No suggestions found");
-            choose(list);
         }
     }
 
-    public static void choose(ArrayList<String> list) {
+    public static void choose(ArrayList<String> list, int numberofitems) {
         Scanner lookfor = new Scanner(System.in);
         System.out.println("Enter a number to select your suggestion");
-        int kendall = lookfor.nextInt();
-        kendall--;
-        // System.out.println(list.get(kendall));
-        Final.add(" " + list.get(kendall));
+        int reduce = lookfor.nextInt();
+        if (reduce == numberofitems) {
+            for (int i = numberofitems - 1; i < numberofitems + 4 && i < list.size(); i++) {
+                System.out.println(i + 1 + ": " + list.get(i));
+            }
+            if (numberofitems >= list.size()) {
+
+                choose(list, -1);
+            } else {
+                System.out.println(numberofitems + 5 + ": More suggestions");
+                choose(list, numberofitems + 5);
+            }
+        } else {
+            reduce--;
+            // System.out.println(list.get(reduce));
+            Final.add(" " + list.get(reduce));
+        }
     }
 
     public static void printall() {
+        System.out.print("Your corrected sentance: ");
         for (int i = 0; i < Final.size(); i++) {
             if (i == 0) {
                 String r = Final.get(0);
