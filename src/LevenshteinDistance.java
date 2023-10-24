@@ -85,7 +85,7 @@ public class LevenshteinDistance {
             counter++;
             if (Dictionary.size() == counter) {
                 Tolerance++;
-                System.out.println(Tolerance);
+                // System.out.println(Tolerance);
                 if (Tolerance != 3) {
                     Scanheap(word1, Tolerance);
                 } else if (Tolerance == 3) {
@@ -164,7 +164,6 @@ public class LevenshteinDistance {
     public static void getTop5Suggestions(String word2, int distance, boolean STOP, String word1) {
         if (distance == 1) {
             list.add(0, word2);
-            // counter++;
         } else if (distance == 2)
             list.add(word2);
         if (STOP) {
