@@ -6,33 +6,43 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-
 public class LevenshteinDistance {
     private static HashSet<String> Dictionary = new HashSet<>();
     private static int counter;
+    private static ArrayList<String> list = new ArrayList<>();
+    private static ArrayList<String> Final = new ArrayList<>();
 
     public static void start() {
+        Final.removeAll(Final);
+        int number = 0;
         System.out.println("Type a word or sentence");
         Scanner scan = new Scanner(System.in);
         String word = scan.nextLine();
         // String word = WORD.toLowerCase();
 
         String NEW1[] = word.split("\\s+|(?=[.,?])");
+        int y = NEW1.length;
+
         // this splits the sentance into words and then puts those words in an array
         // called NEW1[]
 
-        for (String word1 : NEW1) { // this line goes through each word in the sentance that the user entered
-            LevenshteinDistance.Scanheap(word1, 0);// it then calls the scanheap class
-        }
-
-
-
-        /*for (String word1 : NEW1) {
+        for (String word1 : NEW1) { // this line goes through each word in the sentance that the user entered // it
+                                    // then calls the scanheap class
+            number++;
             LevenshteinDistance.Scanheap(word1, 0);
-            List<String> suggestions = getTop5Suggestions(word1);
-            printSuggestions(word1, suggestions);
+            if (number == y) {
+                printall();
+            }
+
         }
-        */
+
+        /*
+         * for (String word1 : NEW1) {
+         * LevenshteinDistance.Scanheap(word1, 0);
+         * List<String> suggestions = getTop5Suggestions(word1);
+         * printSuggestions(word1, suggestions);
+         * }
+         */
 
     }
 
@@ -63,6 +73,10 @@ public class LevenshteinDistance {
             GoThroughDictionary(word1, Tolerance);
         } else {// if the word is spelled correctly it prints the word and a check mark
             System.out.println(word1 + " ✅");
+            if (word1.equals(".") || word1.equals(",") || word1.equals("?")) {
+                Final.add(word1);
+            } else
+                Final.add(" " + word1);
         }
     }
 
@@ -75,6 +89,8 @@ public class LevenshteinDistance {
                 if (Tolerance != 3) {
                     Scanheap(word1, Tolerance);
                 } else if (Tolerance == 3) {
+                    getTop5Suggestions("GAVIN", 10, true, word1);
+                    list.removeAll(list);
                     Tolerance = 0;
                     break;
                 }
@@ -85,7 +101,7 @@ public class LevenshteinDistance {
             if (word1.length() > 3 && word2.length() > 3) {
                 if (!word1.substring(0, 2).equals(word2.substring(0, 2))
                         && !word1.substring(word1.length() - 2, word1.length())
-                        .equals(word2.substring(word2.length() - 2, word2.length()))) {
+                                .equals(word2.substring(word2.length() - 2, word2.length()))) {
                     continue;
                 }
             }
@@ -98,15 +114,12 @@ public class LevenshteinDistance {
         int distance = calculateDistance(word1, word2);
 
         if (distance < 3) {/*
-         * if the edit distance is less than 3 it returns the incorrect spelled word and
-         * then it shows that word it suggust to correct it with
-         */
-
-            System.out.println(
-                    "Levenshtein distance between '" + word1 + "' and '" + word2 + "' is: " + distance);
+                            * if the edit distance is less than 3 it returns the incorrect spelled word and
+                            * then it shows that word it suggust to correct it with
+                            */
+            getTop5Suggestions(word2, distance, false, word1);
         }
     }
-
 
     public static int calculateDistance(String word1, String word2) {
         int len1 = word1.length();
@@ -148,39 +161,48 @@ public class LevenshteinDistance {
         }
     }
 
-
-    /*
-    public static List<String> getTop5Suggestions(String word1) {
-        Map<String, Integer> suggestionsMap = new HashMap<>();
-
-        for (String word2 : Dictionary) {
-            int distance = calculateDistance(word1, word2);
-
-            if (distance < 3) {
-                suggestionsMap.put(word2, distance);
+    public static void getTop5Suggestions(String word2, int distance, boolean STOP, String word1) {
+        if (distance == 1) {
+            list.add(0, word2);
+            // counter++;
+        } else if (distance == 2)
+            list.add(word2);
+        if (STOP) {
+            if (list.size() > 5) {
+                System.out.println("Suggestions for " + word1);
+                for (int i = 0; i < 5; i++) {
+                    System.out.println(i + 1 + ": " + list.get(i));
+                }
             }
-        }
-
-        List<String> suggestions = new ArrayList<>(suggestionsMap.keySet());
-
-        suggestions.sort(Comparator.comparingInt(suggestionsMap::get));
-
-        int maxSuggestions = Math.min(5, suggestions.size());
-
-        return suggestions.subList(0, maxSuggestions);
-    }
-
-    public static void printSuggestions(String word, List<String> suggestions) {
-        System.out.println("Suggestions for '" + word + "':");
-
-        if (suggestions.isEmpty()) {
-            System.out.println("No suggestions found");
-        } else {
-            for (String suggestion : suggestions) {
-                System.out.println(suggestion + " (Distance: " + calculateDistance(word, suggestion) + ")");
-            }
+            if (list.size() <= 5) {
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println(list.get(i));
+                }
+            } else if (list.isEmpty())
+                System.out.println("No suggestions found");
+            choose(list);
         }
     }
 
-     */
+    public static void choose(ArrayList<String> list) {
+        Scanner lookfor = new Scanner(System.in);
+        System.out.println("Enter a number to select your suggestion");
+        int kendall = lookfor.nextInt();
+        kendall--;
+        // System.out.println(list.get(kendall));
+        Final.add(" " + list.get(kendall));
+    }
+
+    public static void printall() {
+        for (int i = 0; i < Final.size(); i++) {
+            if (i == 0) {
+                String r = Final.get(0);
+                System.out.print(r.substring(1, r.length()));
+            } else {
+                System.out.print(Final.get(i));
+            }
+        }
+        System.out.println("");
+    }
+
 }
