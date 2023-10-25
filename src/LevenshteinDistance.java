@@ -176,6 +176,7 @@ public class LevenshteinDistance {
                 choose(list, 6);
             }
             if (list.size() <= 5 && !list.isEmpty()) {
+                System.out.println("Suggestions for " + word1);
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println(i + 1 + ": " + list.get(i));
                 }
@@ -187,7 +188,7 @@ public class LevenshteinDistance {
 
     public static void choose(ArrayList<String> list, int numberofitems) {
         Scanner lookfor = new Scanner(System.in);
-        System.out.println("Enter a number to select your suggestion");
+        System.out.println("Enter a number in the range to accept the suggestion");
         int reduce = lookfor.nextInt();
         if (reduce < (numberofitems - 5) || reduce > numberofitems) {
             choose(list, numberofitems);
@@ -196,7 +197,7 @@ public class LevenshteinDistance {
                 System.out.println(i + 1 + ": " + list.get(i));
             }
             if (numberofitems >= list.size()) {
-                choose(list, numberofitems + (numberofitems - list.size()) + 1);
+                choose(list, Math.min((list.size()), numberofitems) + 1);
             } else {
                 System.out.println(numberofitems + 5 + ": More suggestions");
                 choose(list, numberofitems + 5);
