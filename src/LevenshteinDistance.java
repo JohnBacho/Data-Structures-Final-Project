@@ -190,6 +190,7 @@ public class LevenshteinDistance {
         Scanner lookfor = new Scanner(System.in);
         System.out.println("Enter a number in the range to accept the suggestion");
         int reduce = lookfor.nextInt();
+
         if (reduce < (numberofitems - 5) || reduce > numberofitems) {
             choose(list, numberofitems);
         } else if (reduce == numberofitems) {
