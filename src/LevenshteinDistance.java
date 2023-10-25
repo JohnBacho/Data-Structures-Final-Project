@@ -194,7 +194,9 @@ public class LevenshteinDistance {
         while (!validInput) {
             System.out.println("Enter a number in the range to accept the suggestion");
             int reduce = lookfor.nextInt();
-            if (reduce < (numberofitems - 5) || reduce > numberofitems) {
+            if (STOP & reduce < (numberofitems - 4) || reduce > numberofitems) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            } else if (reduce < (numberofitems - 5) || reduce > numberofitems) {
                 System.out.println("Invalid input. Please enter a valid number.");
             } else if (STOP) {
                 reduce--;
@@ -204,7 +206,7 @@ public class LevenshteinDistance {
                 for (int i = numberofitems - 1; i < numberofitems + 4 && i < list.size(); i++) {
                     System.out.println(i + 1 + ": " + list.get(i));
                 }
-                if (5 + numberofitems >= list.size()) {
+                if (7 + numberofitems >= list.size()) {
                     numberofitems = numberofitems + 4;
                     STOP = true;
                 } else {
