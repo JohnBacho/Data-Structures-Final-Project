@@ -194,13 +194,12 @@ public class LevenshteinDistance {
         while (!validInput) {
             System.out.println("Enter a number in the range to accept the suggestion");
             int reduce = lookfor.nextInt();
-            if (STOP) {
+            if (reduce < (numberofitems - 5) || reduce > numberofitems) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            } else if (STOP) {
                 reduce--;
                 Final.add(" " + list.get(reduce));
                 validInput = true;
-            }
-            if (reduce < 1 || reduce > numberofitems) {
-                System.out.println("Invalid input. Please enter a valid number.");
             } else if (reduce == numberofitems && reduce != list.size()) {
                 for (int i = numberofitems - 1; i < numberofitems + 4 && i < list.size(); i++) {
                     System.out.println(i + 1 + ": " + list.get(i));
