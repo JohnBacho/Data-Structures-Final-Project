@@ -189,27 +189,33 @@ public class LevenshteinDistance {
     public static void choose(ArrayList<String> list, int numberofitems) {
         Scanner lookfor = new Scanner(System.in);
         boolean validInput = false;
+        boolean STOP = false;
 
         while (!validInput) {
             System.out.println("Enter a number in the range to accept the suggestion");
             int reduce = lookfor.nextInt();
-
+            if (STOP) {
+                reduce--;
+                Final.add(" " + list.get(reduce));
+                validInput = true;
+            }
             if (reduce < 1 || reduce > numberofitems) {
                 System.out.println("Invalid input. Please enter a valid number.");
-            } else if (reduce == numberofitems) {
+            } else if (reduce == numberofitems && reduce != list.size()) {
                 for (int i = numberofitems - 1; i < numberofitems + 4 && i < list.size(); i++) {
                     System.out.println(i + 1 + ": " + list.get(i));
                 }
-                if (numberofitems >= list.size()) {
-                    numberofitems = Math.min(list.size(), numberofitems) + 1;
+                if (5 + numberofitems >= list.size()) {
+                    numberofitems = numberofitems + 4;
+                    STOP = true;
                 } else {
                     System.out.println(numberofitems + 5 + ": More suggestions");
                     numberofitems = numberofitems + 5;
                 }
-            } else {
+            } else if (!STOP) {
                 reduce--;
                 Final.add(" " + list.get(reduce));
-                validInput = true; 
+                validInput = true;
             }
         }
     }
