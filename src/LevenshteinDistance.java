@@ -188,25 +188,29 @@ public class LevenshteinDistance {
 
     public static void choose(ArrayList<String> list, int numberofitems) {
         Scanner lookfor = new Scanner(System.in);
-        System.out.println("Enter a number in the range to accept the suggestion");
-        int reduce = lookfor.nextInt();
+        boolean validInput = false;
 
-        if (reduce < (numberofitems - 5) || reduce > numberofitems) {
-            choose(list, numberofitems);
-        } else if (reduce == numberofitems) {
-            for (int i = numberofitems - 1; i < numberofitems + 4 && i < list.size(); i++) {
-                System.out.println(i + 1 + ": " + list.get(i));
-            }
-            if (numberofitems >= list.size()) {
-                choose(list, Math.min((list.size()), numberofitems) + 1);
+        while (!validInput) {
+            System.out.println("Enter a number in the range to accept the suggestion");
+            int reduce = lookfor.nextInt();
+
+            if (reduce < 1 || reduce > numberofitems) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            } else if (reduce == numberofitems) {
+                for (int i = numberofitems - 1; i < numberofitems + 4 && i < list.size(); i++) {
+                    System.out.println(i + 1 + ": " + list.get(i));
+                }
+                if (numberofitems >= list.size()) {
+                    numberofitems = Math.min(list.size(), numberofitems) + 1;
+                } else {
+                    System.out.println(numberofitems + 5 + ": More suggestions");
+                    numberofitems = numberofitems + 5;
+                }
             } else {
-                System.out.println(numberofitems + 5 + ": More suggestions");
-                choose(list, numberofitems + 5);
+                reduce--;
+                Final.add(" " + list.get(reduce));
+                validInput = true; 
             }
-        } else {
-            reduce--;
-            // System.out.println(list.get(reduce));
-            Final.add(" " + list.get(reduce));
         }
     }
 
