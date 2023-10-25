@@ -13,7 +13,7 @@ public class LevenshteinDistance {
     private static ArrayList<String> Final = new ArrayList<>();
 
     public static void start() {
-        Final.removeAll(Final);
+        Final.removeAll(Final); // clears the Final list before every run
         int number = 0;
         System.out.println("Type a word or sentence");
         Scanner scan = new Scanner(System.in);
@@ -21,7 +21,8 @@ public class LevenshteinDistance {
         // String word = WORD.toLowerCase();
 
         String NEW1[] = word.split("\\s+|(?=[.,?])");
-        int y = NEW1.length;
+        int SizeOfArray = NEW1.length; // this is used down below to find out when the array has gone through every
+                                       // word
 
         // this splits the sentance into words and then puts those words in an array
         // called NEW1[]
@@ -30,20 +31,12 @@ public class LevenshteinDistance {
                                     // then calls the scanheap class
             number++;
             LevenshteinDistance.Scanheap(word1, 0);
-            if (number == y) {
-                printall();
+            if (number == SizeOfArray) { // used to find when the array has gone through every item
+                printall(); // if it has gone through every word in the array it calls the print all
+                            // function to print every word in the final array
             }
 
         }
-
-        /*
-         * for (String word1 : NEW1) {
-         * LevenshteinDistance.Scanheap(word1, 0);
-         * List<String> suggestions = getTop5Suggestions(word1);
-         * printSuggestions(word1, suggestions);
-         * }
-         */
-
     }
 
     public static void Scanheap(String word1, int Tolerance) {
@@ -62,8 +55,9 @@ public class LevenshteinDistance {
             e.printStackTrace();
         }
         /*
-         * the point of this class is to first check if the word is right and if the
-         * word isnt it then uses the edit distance
+         * the point of this method is to first check if the word is spelled correctly
+         * and if the
+         * word isn't it then calls the calculateDistance whihc find the edit distance
          */
 
         boolean Checker = Dictionary.contains(word1);// checks if the word exist in the dictionary
