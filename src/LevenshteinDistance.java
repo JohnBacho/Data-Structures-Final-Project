@@ -199,7 +199,7 @@ public class LevenshteinDistance {
             }
             if (numberofitems >= list.size()) {
 
-                choose(list, numberofitems + 5);
+                choose(list, numberofitems + (numberofitems - list.size()) + 1);
             } else {
                 System.out.println(numberofitems + 5 + ": More suggestions");
                 
