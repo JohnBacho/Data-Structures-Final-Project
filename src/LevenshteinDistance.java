@@ -160,7 +160,7 @@ public class LevenshteinDistance {
         } else if (editDistance == 2) {
             list.add(word1);
         }
-        
+
         if (shouldStop) {
             if (list.size() > 5) {
                 System.out.println("Suggestions for " + word2);
@@ -182,22 +182,21 @@ public class LevenshteinDistance {
             }
         }
     }
-    
 
     public static void choose(ArrayList<String> suggestions, int numberOfSuggestions) {
         Scanner inputScanner = new Scanner(System.in);
         boolean validInput = false;
-        boolean shouldStop = false;
+        boolean STOP = false;
 
         while (!validInput) {
             System.out.println("Enter a number within the range to accept the suggestion");
             int choice = inputScanner.nextInt();
 
-            if (shouldStop && (choice < (numberOfSuggestions - 4) || choice > numberOfSuggestions)) {
+            if (STOP && (choice < (numberOfSuggestions - 4) || choice > numberOfSuggestions)) {
                 System.out.println("Invalid input. Please enter a valid number.");
             } else if (choice < (numberOfSuggestions - 5) || choice > numberOfSuggestions) {
                 System.out.println("Invalid input. Please enter a valid number.");
-            } else if (shouldStop) {
+            } else if (STOP) {
                 choice--;
                 Final.add(" " + suggestions.get(choice));
                 validInput = true;
@@ -207,12 +206,12 @@ public class LevenshteinDistance {
                 }
                 if (numberOfSuggestions + 4 >= suggestions.size()) {
                     numberOfSuggestions += 4;
-                    shouldStop = true;
+                    STOP = true;
                 } else {
                     System.out.println(numberOfSuggestions + 5 + ": More suggestions");
                     numberOfSuggestions += 5;
                 }
-            } else if (!shouldStop) {
+            } else if (!STOP) {
                 choice--;
                 Final.add(" " + suggestions.get(choice));
                 validInput = true;
