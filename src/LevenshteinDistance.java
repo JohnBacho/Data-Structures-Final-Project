@@ -13,34 +13,31 @@ public class LevenshteinDistance {
     private static ArrayList<String> Final = new ArrayList<>();
 
     public static void start() {
-        Final.removeAll(Final); // clears the Final list before every run
-        int number = 0;
+        Final.removeAll(Final); // Clears the Final list before every run
+        int wordCount = 0;
         System.out.println("Type a word or sentence");
-        Scanner scan = new Scanner(System.in);
-        String word = scan.nextLine();
-        // String word = WORD.toLowerCase();
+        Scanner scanner = new Scanner(System.in);
+        String inputSentence = scanner.nextLine();
 
-        String NEW1[] = word.split("\\s+|(?=[.,?])");
-        int SizeOfArray = NEW1.length; // this is used down below to find out when the array has gone through every
-                                       // word
+        String words[] = inputSentence.split("\\s+|(?=[.,?])");
+        int numberOfWords = words.length; // This is used later to determine when the array has gone through every word
 
-        // this splits the sentance into words and then puts those words in an array
-        // called NEW1[]
+        // Split the sentence into words and put those words in an array called "words"
 
-        for (String word1 : NEW1) { // this line goes through each word in the sentance that the user entered
-                                    // it then calls the scanheap class
-            number++;
-            LevenshteinDistance.Scanheap(word1, 0);
-            if (number == SizeOfArray) { // used to find when the array has gone through every item
-                printall(); // if it has gone through every word in the array it calls the print all
-                            // function to print every word in the final array
+        for (String word : words) {
+            wordCount++;
+            LevenshteinDistance.ScanHashSet(word, 0);
+            if (wordCount == numberOfWords) { // Used to determine when the array has gone through every item
+                PrintCorrectedSentence(); // If it has gone through every word in the array, call the printAll function
+                                          // to
+                // print every word in the final array
             }
-
         }
     }
 
-    public static void Scanheap(String word1, int Tolerance) {
+    public static void ScanHashSet(String Word1, int tolerance) {
         BufferedReader reader;
+
         try {
             reader = new BufferedReader(new FileReader("wiki-100k.txt"));
             String line = reader.readLine();
@@ -54,23 +51,26 @@ public class LevenshteinDistance {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         /*
-         * the point of this method is to first check if the word is spelled correctly
-         * and if the
-         * word isn't it then calls the calculateDistance whihc find the edit distance
+         * The purpose of this method is to first check if the word is spelled
+         * correctly,
+         * and if the word isn't spelled correctly, it then calls the calculateDistance
+         * method to find the edit distance.
          */
 
-        boolean Checker = Dictionary.contains(word1);// checks if the word exist in the dictionary
+        boolean isCorrectlySpelled = Dictionary.contains(Word1); // Checks if the word exists in the dictionary
 
-        if (Checker == false) { // if it doesn't exist it goes through the edit distance alogrithm
+        if (!isCorrectlySpelled) { // If it doesn't exist, it goes through the edit distance algorithm
             counter = 0;
-            GoThroughDictionary(word1, Tolerance);
-        } else {// if the word is spelled correctly it prints the word and a check mark
-            System.out.println(word1 + " ✅");
-            if (word1.equals(".") || word1.equals(",") || word1.equals("?")) {
-                Final.add(word1);
-            } else
-                Final.add(" " + word1);
+            GoThroughDictionary(Word1, tolerance);
+        } else { // If the word is spelled correctly, it prints the word and a check mark
+            System.out.println(Word1 + " ✅");
+            if (Word1.equals(".") || Word1.equals(",") || Word1.equals("?")) {
+                Final.add(Word1);
+            } else {
+                Final.add(" " + Word1);
+            }
         }
     }
 
@@ -81,9 +81,9 @@ public class LevenshteinDistance {
                 Tolerance++;
                 // System.out.println(Tolerance);
                 if (Tolerance != 3) {
-                    Scanheap(word1, Tolerance);
+                    ScanHashSet(word1, Tolerance);
                 } else if (Tolerance == 3) {
-                    getTop5Suggestions("GAVIN", 10, true, word1);
+                    getTopSuggestions("GAVIN", 10, true, word1);
                     list.removeAll(list);
                     Tolerance = 0;
                     break;
@@ -99,19 +99,18 @@ public class LevenshteinDistance {
                     continue;
                 }
             }
-            phone(word1, word2);
+            SpellChecker(word1, word2);
         }
-
     }
 
-    public static void phone(String word1, String word2) {
+    public static void SpellChecker(String word1, String word2) {
         int distance = calculateDistance(word1, word2);
 
         if (distance < 3) {/*
                             * if the edit distance is less than 3 it returns the incorrect spelled word and
                             * then it shows that word it suggust to correct it with
                             */
-            getTop5Suggestions(word2, distance, false, word1);
+            getTopSuggestions(word2, distance, false, word1);
         }
     }
 
@@ -155,14 +154,16 @@ public class LevenshteinDistance {
         }
     }
 
-    public static void getTop5Suggestions(String word2, int distance, boolean STOP, String word1) {
-        if (distance == 1) {
-            list.add(0, word2);
-        } else if (distance == 2)
-            list.add(word2);
-        if (STOP) {
+    public static void getTopSuggestions(String word1, int editDistance, boolean shouldStop, String word2) {
+        if (editDistance == 1) {
+            list.add(0, word1);
+        } else if (editDistance == 2) {
+            list.add(word1);
+        }
+        
+        if (shouldStop) {
             if (list.size() > 5) {
-                System.out.println("Suggestions for " + word1);
+                System.out.println("Suggestions for " + word2);
                 for (int i = 0; i < 5; i++) {
                     System.out.println(i + 1 + ": " + list.get(i));
                 }
@@ -170,54 +171,56 @@ public class LevenshteinDistance {
                 choose(list, 6);
             }
             if (list.size() <= 5 && !list.isEmpty()) {
-                System.out.println("Suggestions for " + word1);
+                System.out.println("Suggestions for " + word2);
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println(i + 1 + ": " + list.get(i));
                 }
                 choose(list, list.size());
             } else if (list.isEmpty()) {
                 System.out.println("No suggestions found");
-                Final.add(" " + word1);
+                Final.add(" " + word2);
             }
         }
     }
+    
 
-    public static void choose(ArrayList<String> list, int numberofitems) {
-        Scanner lookfor = new Scanner(System.in);
+    public static void choose(ArrayList<String> suggestions, int numberOfSuggestions) {
+        Scanner inputScanner = new Scanner(System.in);
         boolean validInput = false;
-        boolean STOP = false;
+        boolean shouldStop = false;
 
         while (!validInput) {
-            System.out.println("Enter a number in the range to accept the suggestion");
-            int reduce = lookfor.nextInt();
-            if (STOP & reduce < (numberofitems - 4) || reduce > numberofitems) {
+            System.out.println("Enter a number within the range to accept the suggestion");
+            int choice = inputScanner.nextInt();
+
+            if (shouldStop && (choice < (numberOfSuggestions - 4) || choice > numberOfSuggestions)) {
                 System.out.println("Invalid input. Please enter a valid number.");
-            } else if (reduce < (numberofitems - 5) || reduce > numberofitems) {
+            } else if (choice < (numberOfSuggestions - 5) || choice > numberOfSuggestions) {
                 System.out.println("Invalid input. Please enter a valid number.");
-            } else if (STOP) {
-                reduce--;
-                Final.add(" " + list.get(reduce));
+            } else if (shouldStop) {
+                choice--;
+                Final.add(" " + suggestions.get(choice));
                 validInput = true;
-            } else if (reduce == numberofitems && reduce != list.size()) {
-                for (int i = numberofitems - 1; i < numberofitems + 4 && i < list.size(); i++) {
-                    System.out.println(i + 1 + ": " + list.get(i));
+            } else if (choice == numberOfSuggestions && choice != suggestions.size()) {
+                for (int i = numberOfSuggestions - 1; i < numberOfSuggestions + 4 && i < suggestions.size(); i++) {
+                    System.out.println(i + 1 + ": " + suggestions.get(i));
                 }
-                if (7 + numberofitems >= list.size()) {
-                    numberofitems = numberofitems + 4;
-                    STOP = true;
+                if (numberOfSuggestions + 4 >= suggestions.size()) {
+                    numberOfSuggestions += 4;
+                    shouldStop = true;
                 } else {
-                    System.out.println(numberofitems + 5 + ": More suggestions");
-                    numberofitems = numberofitems + 5;
+                    System.out.println(numberOfSuggestions + 5 + ": More suggestions");
+                    numberOfSuggestions += 5;
                 }
-            } else if (!STOP) {
-                reduce--;
-                Final.add(" " + list.get(reduce));
+            } else if (!shouldStop) {
+                choice--;
+                Final.add(" " + suggestions.get(choice));
                 validInput = true;
             }
         }
     }
 
-    public static void printall() {
+    public static void PrintCorrectedSentence() {
         System.out.print("Your corrected sentance: ");
         for (int i = 0; i < Final.size(); i++) { // goes through all the words that are stored in final
             if (i == 0) { // Prints out the first word and removes the space at the start
