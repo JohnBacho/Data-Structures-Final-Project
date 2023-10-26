@@ -2,12 +2,13 @@ import java.util.Scanner;
 
 public class Driver {
     public static void main(String[] args) {
-        int number = 3;
-        while (number != 0) {
+        while (true) {
             System.out.println("Enter a 1 to start program. Enter a 2 to add to dictionary");
             Scanner scan = new Scanner(System.in);
-            number = scan.nextInt();
-
+            int number = scan.nextInt();
+            if (number != 1 || number != 2) {
+                System.out.println("invaild input");
+            }
             if (number == 1) {
                 LevenshteinDistance.start();
             }

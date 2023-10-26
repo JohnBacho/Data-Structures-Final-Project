@@ -175,8 +175,10 @@ public class LevenshteinDistance {
                     System.out.println(i + 1 + ": " + list.get(i));
                 }
                 choose(list, list.size());
-            } else if (list.isEmpty())
+            } else if (list.isEmpty()) {
                 System.out.println("No suggestions found");
+                Final.add(" " + word1);
+            }
         }
     }
 
