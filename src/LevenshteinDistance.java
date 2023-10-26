@@ -219,12 +219,12 @@ public class LevenshteinDistance {
 
     public static void printall() {
         System.out.print("Your corrected sentance: ");
-        for (int i = 0; i < Final.size(); i++) {
-            if (i == 0) {
+        for (int i = 0; i < Final.size(); i++) { // goes through all the words that are stored in final
+            if (i == 0) { // Prints out the first word and removes the space at the start
                 String r = Final.get(0);
                 System.out.print(r.substring(1, r.length()));
             } else {
-                System.out.print(Final.get(i));
+                System.out.print(Final.get(i)); // prints out the word
             }
         }
         System.out.println("");
