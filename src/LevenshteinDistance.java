@@ -27,8 +27,8 @@ public class LevenshteinDistance {
         // this splits the sentance into words and then puts those words in an array
         // called NEW1[]
 
-        for (String word1 : NEW1) { // this line goes through each word in the sentance that the user entered // it
-                                    // then calls the scanheap class
+        for (String word1 : NEW1) { // this line goes through each word in the sentance that the user entered
+                                    // it then calls the scanheap class
             number++;
             LevenshteinDistance.Scanheap(word1, 0);
             if (number == SizeOfArray) { // used to find when the array has gone through every item
