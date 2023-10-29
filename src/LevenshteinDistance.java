@@ -19,7 +19,7 @@ public class LevenshteinDistance {
         Scanner scanner = new Scanner(System.in);
         String inputSentence = scanner.nextLine();
 
-        String words[] = inputSentence.split("\\s+|(?=[.,?])");
+        String words[] = inputSentence.split("\\s+|(?=[.,?!])");
         int numberOfWords = words.length; // This is used later to determine when the array has gone through every word
 
         // Split the sentence into words and put those words in an array called "words"
