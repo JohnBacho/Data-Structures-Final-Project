@@ -115,34 +115,27 @@ public class LevenshteinDistance {
     }
 
     public static int calculateDistance(String word1, String word2) {
-        int len1 = word1.length();
-        int len2 = word2.length();
-        /*
-         * this method finds the minimum edit distance between word 1 and word 2
-         * to find the minimum edit distance between the 2 it trys inserting a charter
-         * deleting a charter and subsituting a charter
-         * it is trying to find out how many actions need to be performed to make word1
-         * look like word2
-         */
+        int m = word1.length();
+        int n = word2.length();
 
-        if (len1 == 0) {
-            return len2;
+        int[][] dp = new int[m + 1][n + 1];
+
+        for (int i = 0; i <= m; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= n; j++) {
+            dp[0][j] = j;
         }
 
-        if (len2 == 0) {
-            return len1;
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                int cost = (word1.charAt(i - 1) != word2.charAt(j - 1)) ? 1 : 0;
+                dp[i][j] = Math.min(
+                        Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1),
+                        dp[i - 1][j - 1] + cost);
+            }
         }
-
-        if (word1.charAt(0) == word2.charAt(0)) {
-            return calculateDistance(word1.substring(1), word2.substring(1));
-        }
-
-        int insertion = calculateDistance(word1, word2.substring(1)) + 1;
-        int deletion = calculateDistance(word1.substring(1), word2) + 1;
-        int substitution = calculateDistance(word1.substring(1), word2.substring(1)) + 1;
-
-        return Math.min(Math.min(insertion, substitution), deletion);
-
+        return dp[m][n];
     }
 
     public static void AddToTXT(String item) { // this Just appends the word entered into the txt file :)
