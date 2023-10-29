@@ -32,7 +32,7 @@ public class dynamic_programming {
                 PrintCorrectedSentence(); // If it has gone through every word in the array, call the printAll function
                 long end = System.nanoTime();
                 System.out.println(end - start + "NS");
-                long convert = TimeUnit.SECONDS.convert(end - start, TimeUnit.NANOSECONDS);
+                double convert = (end - start) / 1e9;
                 System.out.println(convert + "Seconds");
                 // to
                 // print every word in the final array
