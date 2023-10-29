@@ -113,7 +113,7 @@ public class Testing {
         int distance = calculateDistance(word1, word2);
 
         if (distance < 3) {
-            System.out.println("Distance between: " + word1 + " and " + word2 + " is " + distance);
+            //System.out.println("Distance between: " + word1 + " and " + word2 + " is " + distance);
             /*
              * if the edit
              * distance is less
