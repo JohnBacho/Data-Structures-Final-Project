@@ -29,7 +29,7 @@ public class dynamic_programming {
             wordCount++;
             dynamic_programming.ScanHashSet(word, 0);
             if (wordCount == numberOfWords) { // Used to determine when the array has gone through every item
-                PrintCorrectedSentence(); // If it has gone through every word in the array, call the printAll function
+                //PrintCorrectedSentence(); // If it has gone through every word in the array, call the printAll function
                 long end = System.nanoTime();
                 System.out.println(end - start + "NS");
                 double convert = (end - start) / 1e9;
