@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class Testing {
+public class Recursive {
     private static HashSet<String> Dictionary = new HashSet<>();
     private static int counter;
     private static ArrayList<String> list = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Testing {
 
         for (String word : words) {
             wordCount++;
-            Testing.ScanHashSet(word, 0);
+            Recursive.ScanHashSet(word, 0);
             if (wordCount == numberOfWords) { // Used to determine when the array has gone through every item
                 // PrintCorrectedSentence(); // If it has gone through every word in the array,
                 // call the printAll function
