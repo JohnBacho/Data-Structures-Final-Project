@@ -29,9 +29,10 @@ public class dynamic_programming {
             wordCount++;
             dynamic_programming.ScanHashSet(word, 0);
             if (wordCount == numberOfWords) { // Used to determine when the array has gone through every item
-                //PrintCorrectedSentence(); // If it has gone through every word in the array, call the printAll function
+                // PrintCorrectedSentence(); // If it has gone through every word in the array,
+                // call the printAll function
                 long end = System.nanoTime();
-                System.out.println(end - start + "NS");
+                // System.out.println(end - start + "NS");
                 double convert = (end - start) / 1e9;
                 System.out.println(convert + "Seconds");
                 // to
@@ -112,7 +113,8 @@ public class dynamic_programming {
         int distance = calculateDistance(word1, word2);
 
         if (distance < 3) {
-            //System.out.println("Distance between: " + word1 + " and " + word2 + " is " + distance);
+            // System.out.println("Distance between: " + word1 + " and " + word2 + " is " +
+            // distance);
             /*
              * if the edit
              * distance is less

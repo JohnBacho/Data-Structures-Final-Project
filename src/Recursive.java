@@ -32,7 +32,7 @@ public class Recursive {
                 // PrintCorrectedSentence(); // If it has gone through every word in the array,
                 // call the printAll function
                 long end = System.nanoTime();
-                System.out.println(end - start + " NS");
+                // System.out.println(end - start + " NS");
                 double convert = (end - start) / 1e9;
                 // long convert = TimeUnit.SECONDS.convert(end - start, TimeUnit.NANOSECONDS);
                 System.out.println(convert + " Seconds");
