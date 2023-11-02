@@ -5,7 +5,7 @@ public class Driver {
     public static void main(String[] args) {
         while (true) {
             System.out.println(
-                    "1. Main \n2. Recursive\n3. Dynamic Programming\n4. Add a word to the dictionary\n5. Scan Hashset time");
+                    "1. Main \n2. Recursive\n3. Dynamic Programming\n4. Add a word to the dictionary\n5. Hashset Search Time");
             Scanner scan = new Scanner(System.in);
             int number = scan.nextInt();
             if (number != 1 && number != 2 && number != 3 && number != 4 && number != 5) {
