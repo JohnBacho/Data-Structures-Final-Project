@@ -9,6 +9,15 @@ public class BinarySearchTree {
             if(root.getLeftChild() == null){
                 root.setLeftChild(new Node(word));
             }
+            else
+                insert(word,root.getLeftChild());
+        }
+        else if ( word.compareTo(root.getWord())>0){
+            if (root.getRightChild() == null){
+                root.setRightChild(new Node(word));
+            }
+            else
+                insert(word,root.getRightChild());
         }
     }
 
