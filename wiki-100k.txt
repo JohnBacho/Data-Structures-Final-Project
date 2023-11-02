@@ -100906,5 +100906,3 @@ Incomprehensive
 okay
 alright
 regardless
-appraisal
-psychoacoustics
