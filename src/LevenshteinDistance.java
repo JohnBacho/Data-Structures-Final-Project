@@ -197,7 +197,7 @@ public class LevenshteinDistance {
                 for (int i = numberOfSuggestions - 1; i < numberOfSuggestions + 4 && i < suggestions.size(); i++) {
                     System.out.println(i + 1 + ": " + suggestions.get(i));
                 }
-                if (numberOfSuggestions + 4 >= suggestions.size()) {
+                if (numberOfSuggestions + 6 >= suggestions.size()) {
                     numberOfSuggestions += 4;
                     STOP = true;
                 } else {
