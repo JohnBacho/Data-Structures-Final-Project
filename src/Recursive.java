@@ -99,27 +99,27 @@ public class Recursive {
             if (Math.abs(word1.length() - word2.length()) != Tolerance) {
                 continue;
             }
-                if (word1.length() > 3 && word2.length() > 3) {
-                    int stopper = 0;
-                    if (!word1.substring(0).equals(word2.substring(0))) {
-                        stopper++;
-                    }
-                    if (!word1.substring(1).equals(word2.substring(1))) {
-                        stopper++;
-                    }
-                    if (!word1.substring(word1.length() - 1).equals(word2.substring(word2.length() - 1))) {
-                        stopper++;
-                    }
-                    if (!word1.substring(word1.length() - 2).equals(word2.substring(word2.length() - 2))) {
-                        stopper++;
-                    }
-                    if (stopper > 3) {
-                        continue;
-                    }
+            if (word1.length() > 3 && word2.length() > 3) {
+                int stopper = 0;
+                if (!word1.substring(0).equals(word2.substring(0))) {
+                    stopper++;
                 }
-                SpellChecker(word1, word2);
+                if (!word1.substring(1).equals(word2.substring(1))) {
+                    stopper++;
+                }
+                if (!word1.substring(word1.length() - 1).equals(word2.substring(word2.length() - 1))) {
+                    stopper++;
+                }
+                if (!word1.substring(word1.length() - 2).equals(word2.substring(word2.length() - 2))) {
+                    stopper++;
+                }
+                if (stopper > 3) {
+                    continue;
+                }
             }
+            SpellChecker(word1, word2);
         }
+    }
 
     public static void SpellChecker(String word1, String word2) {
         int distance = calculateDistance(word1, word2);

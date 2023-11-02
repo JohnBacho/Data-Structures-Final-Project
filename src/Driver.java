@@ -24,13 +24,15 @@ public class Driver {
             } else if (number == 5) {
                 System.out.println("Enter word");
                 Hashset.ScanHashSet();
-            }
-            else if (number == 6){
+            } else if (number == 6) {
                 System.out.println("Enter word");
                 BinarySearchTree.ScanBinarySearchTree();
-            }
-            else if(number == 7){
-                BinarySearchTree.ScanBinarySearchTree();
+            } else if (number == 7) {
+                long start = System.nanoTime();
+                int driver = testtttting.calculateDistance("disappointmment", "Disappointment");
+                long end = System.nanoTime();
+                double convert = (end - start) / 1e9;
+                System.err.println(convert + " " + driver);
             }
 
         }
