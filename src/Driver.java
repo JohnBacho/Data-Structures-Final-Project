@@ -5,10 +5,10 @@ public class Driver {
     public static void main(String[] args) {
         while (true) {
             System.out.println(
-                    "1. Main \n2. Recursive\n3. Dynamic Programming\n4. Add a word to the dictionary\n5. Hashset Search Time");
+                    "1. Main \n2. Recursive\n3. Dynamic Programming\n4. Add a word to the dictionary\n5. Hashset Search Time\n6. Binary Search Tree Time");
             Scanner scan = new Scanner(System.in);
             int number = scan.nextInt();
-            if (number != 1 && number != 2 && number != 3 && number != 4 && number != 5) {
+            if (number != 1 && number != 2 && number != 3 && number != 4 && number != 5 && number != 6) {
                 System.out.println("invaild input");
             } else if (number == 1) {
                 LevenshteinDistance.start();
@@ -24,6 +24,10 @@ public class Driver {
             } else if (number == 5) {
                 System.out.println("Enter word");
                 Hashset.ScanHashSet();
+            }
+            else if (number == 6){
+                System.out.println("Enter word");
+                BinarySearchTree.ScanBinarySearchTree();
             }
 
         }
