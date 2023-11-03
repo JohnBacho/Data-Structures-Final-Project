@@ -9,7 +9,7 @@ public class Driver {
             Scanner scan = new Scanner(System.in);
             int number = scan.nextInt();
             if (number != 1 && number != 2 && number != 3 && number != 4 && number != 5 && number != 6 && number != 7) {
-                System.out.println("invaild input");
+                System.out.println("invalid input");
             } else if (number == 1) {
                 LevenshteinDistance.start();
             } else if (number == 2) {
