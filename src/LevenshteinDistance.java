@@ -106,7 +106,7 @@ public class LevenshteinDistance {
                 if (!word1.substring(word1.length() - 2).equals(word2.substring(word2.length() - 2))) {
                     stopper++;
                 }
-                if (stopper > 3) {
+                if (stopper >= 3) {
                     continue;
                 }
             }

@@ -29,7 +29,7 @@ public class Driver {
                 BinarySearchTree.ScanBinarySearchTree();
             } else if (number == 7) {
                 long start = System.nanoTime();
-                int driver = testtttting.calculateDistance("disappointmment", "Disappointment");
+                int driver = testtttting.calculateDistance("Disappointmment", "Unmittelbarkeit");
                 long end = System.nanoTime();
                 double convert = (end - start) / 1e9;
                 System.err.println(convert + " " + driver);
