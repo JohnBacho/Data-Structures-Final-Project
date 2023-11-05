@@ -19176,7 +19176,6 @@ GOOD
 Lucretia
 Official
 cards
-Wiktionary:Frequency lists/Project Gutenberg 30001-40000|30001-40000
 #!comment: 20001 - 21000
 sucked
 sucking
@@ -39024,7 +39023,7 @@ Sturm
 Tecumseh
 acceptation
 afar
-comming
+coming
 emoluments
 foreword
 pipes
@@ -83945,7 +83944,6 @@ sourness
 tenta
 travaillant
 trigonometry
-truely
 vegetate
 villeins
 whales
@@ -97858,7 +97856,6 @@ venian
 veut
 vielä
 voimme
-wether
 wezen
 witted
 zwak
