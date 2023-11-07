@@ -8,7 +8,7 @@ public class Driver {
                     "1. Main \n2. Recursive\n3. Dynamic Programming\n4. Add a word to the dictionary\n5. Hashset Search Time\n6. Binary Search Tree Time");
             Scanner scan = new Scanner(System.in);
             int number = scan.nextInt();
-            if (number != 1 && number != 2 && number != 3 && number != 4 && number != 5 && number != 6 && number != 7) {
+            if (number != 1 && number != 2 && number != 3 && number != 4 && number != 5 && number != 6) {
                 System.out.println("invalid input");
             } else if (number == 1) {
                 LevenshteinDistance.start();
@@ -27,12 +27,6 @@ public class Driver {
             } else if (number == 6) {
                 System.out.println("Enter word");
                 BinarySearchTree.ScanBinarySearchTree();
-            } else if (number == 7) {
-                long start = System.nanoTime();
-                int driver = testtttting.calculateDistance("Disappointmment", "Unmittelbarkeit");
-                long end = System.nanoTime();
-                double convert = (end - start) / 1e9;
-                System.err.println(convert + " " + driver);
             }
 
         }

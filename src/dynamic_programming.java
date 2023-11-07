@@ -12,7 +12,6 @@ public class dynamic_programming {
     private static int counter;
     private static ArrayList<String> list = new ArrayList<>();
     private static ArrayList<String> Final = new ArrayList<>();
-     private static ArrayList<String> stat = new ArrayList<>();
 
     public static void start() {
         Final.removeAll(Final); // Clears the Final list before every run
@@ -36,7 +35,6 @@ public class dynamic_programming {
                 // System.out.println(end - start + "NS");
                 double convert = (end - start) / 1e9;
                 System.out.println(convert + "Seconds");
-                stat.size();
                 // to
                 // print every word in the final array
             }
@@ -118,7 +116,6 @@ public class dynamic_programming {
                     continue;
                 }
             }
-            stat.add(word2);
             SpellChecker(word1, word2);
 
         }
