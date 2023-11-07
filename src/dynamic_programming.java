@@ -34,7 +34,7 @@ public class dynamic_programming {
                 long end = System.nanoTime();
                 // System.out.println(end - start + "NS");
                 double convert = (end - start) / 1e9;
-                System.out.println(convert + "Seconds");
+                System.out.println(convert + " Seconds");
                 // to
                 // print every word in the final array
             }
