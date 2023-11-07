@@ -100903,3 +100903,7 @@ Incomprehensive
 okay
 alright
 regardless
+prognosis
+recursion
+rucks
+ruck
