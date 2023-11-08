@@ -22,15 +22,14 @@ public class LevenshteinDistance {
         String words[] = inputSentence.split("\\s+|(?=[.,?!])");
         int numberOfWords = words.length; // This is used later to determine when the array has gone through every word
 
-        // Split the sentence into words and put those words in an array called "words"
+        // Splits the sentence into words and put those words in an array called "words"
 
         for (String word : words) {
             wordCount++;
             LevenshteinDistance.ScanHashSet(word, 0);
             if (wordCount == numberOfWords) { // Used to determine when the array has gone through every item
                 PrintCorrectedSentence(); // If it has gone through every word in the array, call the printAll function
-                                          // to
-                // print every word in the final array
+                                          // to print every word in the final array
             }
         }
     }
@@ -39,7 +38,8 @@ public class LevenshteinDistance {
         BufferedReader reader;
 
         try {
-            reader = new BufferedReader(new FileReader("wiki-100k.txt"));
+            reader = new BufferedReader(new FileReader("wiki-100k.txt")); // reads the TXT file and inserts the words
+                                                                          // into the hashset
             String line = reader.readLine();
 
             while (line != null) {
@@ -66,10 +66,11 @@ public class LevenshteinDistance {
             GoThroughDictionary(Word1, tolerance);
         } else { // If the word is spelled correctly, it prints the word and a check mark
             System.out.println(Word1 + " ✅");
-            if (Word1.equals(".") || Word1.equals(",") || Word1.equals("?")) {
-                Final.add(Word1);
+            if (Word1.equals(".") || Word1.equals(",") || Word1.equals("?") || Word1.equals("!")) {
+                Final.add(Word1);// this adds the word to the final without the space
             } else {
-                Final.add(" " + Word1);
+                Final.add(" " + Word1); // if the word is spelled correctly it adds a space and adds it to the final
+                                        // array
             }
         }
     }
@@ -88,6 +89,8 @@ public class LevenshteinDistance {
                     Tolerance = 0;
                     break;
                 }
+                /*increaes the tolerance for each run by recursivly calling it self.
+                the tolerance method is used to set the tolerance on the filters*/
             }
             if (Math.abs(word1.length() - word2.length()) != Tolerance) {
                 continue;
