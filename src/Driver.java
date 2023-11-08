@@ -1,14 +1,13 @@
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class Driver {
     public static void main(String[] args) {
         while (true) {
             System.out.println(
-                    "1. Main \n2. Recursive\n3. Dynamic Programming\n4. Add a word to the dictionary\n5. Hashset Search Time\n6. Binary Search Tree Time");
+                    "1. Main \n2. Recursive\n3. Dynamic Programming\n4. Add a word to the dictionary\n5. Hashset Search Time\n6. Binary Search Tree Time\n7. Trie Tree Search Time");
             Scanner scan = new Scanner(System.in);
             int number = scan.nextInt();
-            if (number != 1 && number != 2 && number != 3 && number != 4 && number != 5 && number != 6) {
+            if (number != 1 && number != 2 && number != 3 && number != 4 && number != 5 && number != 6 && number != 7) {
                 System.out.println("invalid input");
             } else if (number == 1) {
                 LevenshteinDistance.start();
@@ -28,6 +27,16 @@ public class Driver {
                 BinarySearchTree.readTextFile();
                 System.out.println("Enter word");
                 BinarySearchTree.ScanBinarySearchTree();
+            } else if (number == 7) {
+                Trie trie = new Trie();
+                trie.readTextFile();
+                System.out.println("Enter word");
+                Scanner view = new Scanner(System.in);
+                String word = view.nextLine();
+                long start = System.nanoTime();
+                trie.search(word);
+                long end = System.nanoTime();
+                System.err.println(end - start + " NS");
             }
 
         }
