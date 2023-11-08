@@ -25,6 +25,7 @@ public class Driver {
                 System.out.println("Enter word");
                 Hashset.ScanHashSet();
             } else if (number == 6) {
+                BinarySearchTree.readTextFile();
                 System.out.println("Enter word");
                 BinarySearchTree.ScanBinarySearchTree();
             }
